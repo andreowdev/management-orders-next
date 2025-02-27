@@ -1,17 +1,15 @@
-import Navbar from "@/components/navbar";
-import TableAgendas from "@/components/tableAgendas";
+import Calendar from "@/components/calendar";
+import { AppSidebar } from "@/components/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function Dashboard() {
   return (
-    <div className="items-center justify-items-center     font-[family-name:var(--font-geist-sans)]">
-        <div className="w-full">
+    <SidebarProvider>
+        <AppSidebar />
+        <SidebarTrigger />
+        <div className="flex-1 flex justify-center  ">
+              <Calendar />
         </div>
-      <main className="">
-        <div>
-            <h1>Agenda de Pedidos</h1>
-            <TableAgendas />
-        </div>
-      </main>
-    </div>
+    </SidebarProvider>
   );
 }

@@ -1,0 +1,65 @@
+/* Estilo geral do FullCalendar */
+.fc {
+  font-family: 'Arial', sans-serif !important;
+  background-color: #f5f5f5 !important; /* Cor de fundo do calendário */
+  border-radius: 10px !important; /* Bordas arredondadas */
+}
+
+/* Barra de ferramentas */
+.fc-toolbar {
+  background-color: #333 !important;  /* Cor de fundo da barra de ferramentas */
+  color: #fff !important;  /* Cor do texto da barra de ferramentas */
+  border-radius: 5px !important;  /* Bordas arredondadas para a barra */
+  padding: 10px !important;
+}
+
+/* Botões da barra de ferramentas */
+.fc-button {
+  background-color: #4CAF50 !important;  /* Cor de fundo dos botões */
+  color: white !important;                /* Cor do texto dos botões */
+  border-radius: 5px !important;          /* Bordas arredondadas */
+  font-size: 14px !important;             /* Tamanho da fonte dos botões */
+  padding: 10px 20px !important;          /* Padding dos botões */
+}
+
+.fc-button:hover {
+  background-color: #45a049 !important;  /* Cor ao passar o mouse (hover) */
+}
+
+.fc-button:disabled {
+  background-color: #ccc !important;     /* Cor dos botões desabilitados */
+  color: #666 !important;                /* Cor do texto dos botões desabilitados */
+}
+
+/* Estilo dos dias do calendário */
+.fc-daygrid-day {
+  border: 1px solid #ddd !important;     /* Cor das bordas das células */
+  background-color: #fff !important;     /* Cor de fundo das células */
+}
+
+/* Estilo para os dias com evento */
+.fc-daygrid-day.fc-day-today {
+  background-color: #FF5733 !important;  /* Cor de fundo para o dia de hoje */
+  color: white !important;               /* Cor do texto do dia de hoje */
+}
+
+/* Estilo dos eventos */
+.fc-event {
+  background-color: #FF5733 !important;  /* Cor de fundo dos eventos */
+  color: white !important;               /* Cor do texto dos eventos */
+  border-radius: 5px !important;         /* Bordas arredondadas para os eventos */
+  padding: 5px 10px !important;          /* Padding nos eventos */
+  font-size: 12px !important;            /* Tamanho da fonte dos eventos */
+}
+
+.fc-event:hover {
+  background-color: #d14f24 !important;  /* Cor dos eventos ao passar o mouse */
+  cursor: pointer !important;
+}
+
+/* Personalizando o título do calendário */
+.fc-toolbar h2 {
+  font-size: 24px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
