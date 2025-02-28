@@ -1,65 +1,167 @@
-/* Estilo geral do FullCalendar */
-.fc {
-  font-family: 'Arial', sans-serif !important;
-  background-color: #f5f5f5 !important; /* Cor de fundo do calendário */
-  border-radius: 10px !important; /* Bordas arredondadas */
+/* ✅ Container do calendário */
+.calendar-container {
+  max-width: 100%;
+  margin: auto;
+  padding: 10px;
 }
 
-/* Barra de ferramentas */
-.fc-toolbar {
-  background-color: #333 !important;  /* Cor de fundo da barra de ferramentas */
-  color: #fff !important;  /* Cor do texto da barra de ferramentas */
-  border-radius: 5px !important;  /* Bordas arredondadas para a barra */
+/* ✅ Layout Geral do FullCalendar */
+.fc-view-harness {
+  height: 550px !important; /* Defina a altura que desejar */
+}
+
+.fc {
+  font-family: 'Arial', sans-serif !important;
+  background-color: #f8f9fa !important;
+  border-radius: 10px !important;
+  padding: 15px !important;
+}
+
+/* ✅ Ajuste no tamanho do calendário */
+
+/* ✅ Tabela de dias maior */
+.fc-daygrid-day-frame {
+  min-height: 100px !important; /* Deixa os dias maiores */
   padding: 10px !important;
 }
 
-/* Botões da barra de ferramentas */
-.fc-button {
-  background-color: #4CAF50 !important;  /* Cor de fundo dos botões */
-  color: white !important;                /* Cor do texto dos botões */
-  border-radius: 5px !important;          /* Bordas arredondadas */
-  font-size: 14px !important;             /* Tamanho da fonte dos botões */
-  padding: 10px 20px !important;          /* Padding dos botões */
-}
-
-.fc-button:hover {
-  background-color: #45a049 !important;  /* Cor ao passar o mouse (hover) */
-}
-
-.fc-button:disabled {
-  background-color: #ccc !important;     /* Cor dos botões desabilitados */
-  color: #666 !important;                /* Cor do texto dos botões desabilitados */
-}
-
-/* Estilo dos dias do calendário */
-.fc-daygrid-day {
-  border: 1px solid #ddd !important;     /* Cor das bordas das células */
-  background-color: #fff !important;     /* Cor de fundo das células */
-}
-
-/* Estilo para os dias com evento */
-.fc-daygrid-day.fc-day-today {
-  background-color: #FF5733 !important;  /* Cor de fundo para o dia de hoje */
-  color: white !important;               /* Cor do texto do dia de hoje */
-}
-
-/* Estilo dos eventos */
-.fc-event {
-  background-color: #FF5733 !important;  /* Cor de fundo dos eventos */
-  color: white !important;               /* Cor do texto dos eventos */
-  border-radius: 5px !important;         /* Bordas arredondadas para os eventos */
-  padding: 5px 10px !important;          /* Padding nos eventos */
-  font-size: 12px !important;            /* Tamanho da fonte dos eventos */
-}
-
-.fc-event:hover {
-  background-color: #d14f24 !important;  /* Cor dos eventos ao passar o mouse */
-  cursor: pointer !important;
-}
-
-/* Personalizando o título do calendário */
-.fc-toolbar h2 {
-  font-size: 24px !important;
+/* ✅ Ajuste na fonte dos dias */
+.fc-daygrid-day-number {
+  font-size: 18px !important;
   font-weight: bold !important;
-  color: #333 !important;
+}
+
+/* ✅ Eventos do calendário */
+.fc-event {
+  background-color: #FF5733 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  padding: 10px 15px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+}
+
+/* ✅ Responsividade para CELULARES PEQUENOS (até 480px) */
+@media (max-width: 480px) {
+  .calendar-container {
+    max-width: 120%;
+    margin: 0;
+    padding: 1px;
+  }
+  .fc {
+    padding: 5px !important;
+    width: 100% !important;
+  }
+
+  .fc .fc-scrollgrid {
+    min-height: 320px !important; /* Aumenta a altura do calendário */
+  }
+  
+
+  .fc-toolbar {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .fc-toolbar h2 {
+    font-size: 14px !important;
+  }
+
+  .fc-button {
+    font-size: 10px !important;
+    padding: 6px 8px !important;
+  }
+
+  .fc-daygrid-day {
+    font-size: 12px !important;
+    min-height: 50px !important; /* Reduz altura dos dias */
+  }
+
+  .fc-daygrid-day-frame {
+    padding: 6px !important;
+  }
+
+  .fc-event {
+    font-size: 10px !important;
+    padding: 4px 6px !important;
+  }
+}
+
+/* ✅ Responsividade para CELULARES MÉDIOS (até 768px) */
+@media (max-width: 768px) {
+  .fc {
+    padding: 5px !important;
+    width: 100% !important;
+  }
+
+  .fc-view-harness {
+    height: 400px !important; /* Defina a altura que desejar */
+  }
+  
+
+  .fc-toolbar {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .fc-toolbar h2 {
+    font-size: 16px !important;
+  }
+
+  .fc-button {
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+  }
+
+  .fc-daygrid-day {
+    font-size: 14px !important;
+    min-height: 70px !important;
+  }
+
+  .fc-daygrid-day-frame {
+    padding: 8px !important;
+  }
+
+  .fc-event {
+    font-size: 12px !important;
+    padding: 5px 8px !important;
+  }
+}
+
+/* ✅ Responsividade para TABLETS (até 1024px) */
+@media (max-width: 1024px) {
+  .fc {
+    padding: 10px !important;
+    width: 100% !important;
+  }
+
+  .fc-toolbar {
+    justify-content: space-between !important;
+  }
+
+  .fc-toolbar h2 {
+    font-size: 20px !important;
+  }
+
+  .fc-button {
+    font-size: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  .fc-daygrid-day {
+    font-size: 16px !important;
+    min-height: 80px !important;
+  }
+
+  .fc-daygrid-day-frame {
+    padding: 10px !important;
+    width: 111%;
+  }
+
+  .fc-event {
+    font-size: 14px !important;
+    padding: 6px 10px !important;
+  }
 }
