@@ -1,63 +1,28 @@
 "use client";
-import { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import ptLocale from "@fullcalendar/core/locales/pt";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import "./ui/calendar.css";
+import { Button } from "./ui/button";
+import { useAppointments } from "@/app/_home/Home/Hooks/useAppointments";
+import { useModal } from "@/app/_home/Home/Hooks/modal";
+import { Card } from "./ui/card";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 export default function Calendar() {
-  const [events, setEvents] = useState([]);
+  const { error, events, loading } = useAppointments();
+  const { isOpen, openModal, closeModal } = useModal()
 
-  async function fetchAppointments() {
-    try {
-      const response = await fetch("/api/appointments");
-
-      if (!response.ok) {
-        throw new Error("Erro ao buscar agendamentos");
-      }
-
-      const data = await response.json();
-      console.log("Dados da API:", data);
-
-      setEvents(
-        data.map((appointment: any) => {
-          // Convertendo as strings para objetos Date
-          const start = new Date(appointment.date); // date vem como string no formato ISO (ex: "2025-02-28T10:00:00")
-      
-          // Verificação de validade da data de término
-          let end = new Date(appointment.time); // time vem como string (ex: "2025-02-28T10:30:00")
-      
-          // Se a string for inválida, podemos configurar um fallback ou mostrar erro
-          if (isNaN(start.getTime())) {
-            console.error("Data de início inválida:", appointment.date);
-          }
-      
-          if (isNaN(end.getTime())) {
-            console.error("Data de término inválida:", appointment.time);
-            // Fallback: se não for válida, usamos a data de início
-            end = new Date(appointment.date); // Usando a mesma data de início como fallback
-          }
-      
-          // Convertendo para o formato ISO, sem ajustar manualmente para o fuso horário
-          return {
-            id: appointment.id,
-            title: appointment.title || "Agendamento",
-            start: start.toISOString(), // Convertendo para formato ISO
-            end: end.toISOString(), // Convertendo para formato ISO
-            description: appointment.description,
-          };
-        })
-      );
-      
-    } catch (error) {
-      console.error("Erro ao buscar eventos:", error);
-    }
+  // Exibição do carregamento ou erro
+  if (loading) {
+    return <div>Carregando eventos...</div>;
   }
 
-  useEffect(() => {
-    fetchAppointments(); // Chamada correta da API
-  }, []);
+  if (error) {
+    return <div>Erro ao carregar eventos: {error}</div>;
+  }
 
   return (
     <div className="calendar-container">
@@ -66,7 +31,7 @@ export default function Calendar() {
         initialView="timeGridWeek"
         locale="pt"
         locales={[ptLocale]}
-        timeZone="local"  // Garante que o fuso horário local seja usado
+        timeZone="local"
         events={events}
         headerToolbar={{
           left: "prev,next today",
@@ -78,6 +43,48 @@ export default function Calendar() {
         eventClassNames={() => "cursor-pointer"}
       />
 
+      {/* Botão para adicionar eventos */}
+      <div>
+        <Button className="cursor-pointer" onClick={openModal}>ADICIONAR EVENTOS</Button>
+      </div>
+      {isOpen && (
+        <div className="fixed inset-0  bg-opacity-50 flex justify-center items-center z-50">
+          <Card className="p-6 rounded-lg shadow-lg w-full sm:w-96">
+            <h2 className="text-xl font-semibold mb-4">Adicionar Evento</h2>
+            <form className="space-y-4">
+              <Label htmlFor="eventTitle" className="block text-sm font-medium text-gray-700">
+                Título:
+              </Label>
+              <Input
+                type="text"
+                id="eventTitle"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+
+              <Label htmlFor="eventDate" className="block text-sm font-medium text-gray-700">
+                Data:
+              </Label>
+              <Input
+                type="date"
+                id="eventDate"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+
+              <div className="flex justify-between items-center">
+                <Button onClick={closeModal} className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
+                  Fechar
+                </Button>
+                <Button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                >
+                  Salvar
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
