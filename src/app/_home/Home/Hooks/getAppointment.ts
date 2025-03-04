@@ -29,16 +29,11 @@ export function useAppointments() {
             console.error("Data de início inválida:", appointment.date);
           }
 
-          if (isNaN(end.getTime())) {
-            console.error("Data de término inválida:", appointment.time);
-            end = new Date(appointment.date); // Usando a mesma data de início como fallback
-          }
 
           return {
             id: appointment.id,
             title: appointment.title || "Agendamento",
             start: start.toISOString(),
-            end: end.toISOString(),
             description: appointment.description,
           };
         })
@@ -57,3 +52,4 @@ export function useAppointments() {
 
   return { events, loading, error };
 }
+

@@ -9,3 +9,5 @@ export async function GET() {
     return NextResponse.json({ error: "Erro ao buscar agendamentos" }, { status: 500 });
   }
 }
+
+

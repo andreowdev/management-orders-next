@@ -2,7 +2,7 @@ import Calendar from "@/components/calendar";
 import { AppSidebar } from "@/components/sidebar/sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
-export default function Dashboard() {
+export default function Home() {
   return (
     <SidebarProvider>
       <AppSidebar />

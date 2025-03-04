@@ -4,17 +4,15 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import ptLocale from "@fullcalendar/core/locales/pt";
 import { Button } from "./ui/button";
-import { useAppointments } from "@/repository/useAppointments";
+import { useAppointments } from "@/app/_home/Home/Hooks/getAppointment";
 import { useModal } from "@/hooks/modal";
 import { Modal } from "./ui/Modal";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import FormEvent from "./ui/formEvent";
 import "./ui/calendar.css"
 export default function Calendar() {
   const { error, events, loading } = useAppointments();
   const { isOpen, openModal, closeModal, selectedEvent } = useModal();
 
-  // Exibição do carregamento ou erro
   if (loading) {
     return <div>Carregando eventos...</div>;
   }
@@ -42,9 +40,7 @@ export default function Calendar() {
       eventTextColor="#fff"
       eventContent={(info) => {
         const title = info.event.title;
-        return (
-            {title}
-        )
+        return `${title}`
       }}
       eventClassNames={() => "cursor-pointer"}
       eventClick={(info: { event: any }) => {
@@ -54,13 +50,13 @@ export default function Calendar() {
 
       {/* Botão para adicionar eventos */}
       <div className="mt-4">
-      <Button className="cursor-pointer" onClick={() => openModal()}>
+      <Button className="cursor-pointer transition duration-300 ease-in-out transform hover:scale-110" onClick={() => openModal()}>
         ADICIONAR EVENTOS
       </Button>
       </div>
 
       {/* Modal para visualizar e adicionar eventos */}
-      <Modal isOpen={isOpen} onClose={closeModal} title={selectedEvent ? "Detalhes do Evento" : "Adicionar Evento"}>
+      <Modal isOpen={isOpen} onClose={closeModal} title={selectedEvent ? "Detalhes do Evento" : ""}>
       {selectedEvent ? (
         <div>
             <p><strong>Título:</strong> {selectedEvent.title}</p>
@@ -70,35 +66,7 @@ export default function Calendar() {
             )}
           </div>
         ) : (
-          <form className="space-y-4">
-            <div>
-              <Label htmlFor="eventTitle" className="block text-sm font-medium text-gray-700">
-                Título:
-              </Label>
-              <Input
-                type="text"
-                id="eventTitle"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="eventDate" className="block text-sm font-medium text-gray-700">
-                Data:
-              </Label>
-              <Input
-                type="date"
-                id="eventDate"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div className="flex justify-end">
-              <Button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                Salvar
-              </Button>
-            </div>
-          </form>
+          <FormEvent />
         )}
       </Modal>
     </div>
