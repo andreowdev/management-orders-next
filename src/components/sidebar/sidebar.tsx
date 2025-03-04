@@ -1,4 +1,3 @@
-import { Calendar, Home, Inbox, Settings, FileText } from "lucide-react"
 
 import {
   Sidebar,
@@ -10,36 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-
-
-
-const items = [
-  {
-    title: "Inicio",
-    url: "#",
-    icon: Home,
-  },
-  {
-    title: "Notificações",
-    url: "#",
-    icon: Inbox,
-  },
-  {
-    title: "Agenda",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Relatórios",
-    url: "#",
-    icon: FileText,
-  },
-  {
-    title: "Configurações",
-    url: "#",
-    icon: Settings,
-  },
-]
+import { items } from "./hooks/useSetup"
 
 export function AppSidebar() {
   return (

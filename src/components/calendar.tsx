@@ -4,11 +4,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import ptLocale from "@fullcalendar/core/locales/pt";
 import { Button } from "./ui/button";
-import { useAppointments } from "@/app/_home/Home/Hooks/useAppointments";
+import { useAppointments } from "@/repository/useAppointments";
 import { useModal } from "@/hooks/modal";
 import { Modal } from "./ui/Modal";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import "./ui/calendar.css"
 export default function Calendar() {
   const { error, events, loading } = useAppointments();
   const { isOpen, openModal, closeModal, selectedEvent } = useModal();
@@ -26,36 +27,42 @@ export default function Calendar() {
   return (
     <div className="calendar-container">
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin]}
-        initialView="timeGridWeek"
-        locale="pt"
-        locales={[ptLocale]}
-        timeZone="local"
-        events={events}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
-        }}
-        eventColor="#FF5733"
-        eventTextColor="#fff"
-        eventClassNames={() => "cursor-pointer"}
-        eventClick={(info) => {
-          openModal(info.event);
-        }}
+      plugins={[dayGridPlugin, timeGridPlugin]}
+      initialView="timeGridWeek"
+      locale="pt"
+      locales={[ptLocale]}
+      timeZone="local"
+      events={events}
+      headerToolbar={{
+        left: "prev,next today",
+        center: "title",
+        right: "dayGridMonth,timeGridWeek,timeGridDay",
+      }}
+      eventColor="#FF5733"
+      eventTextColor="#fff"
+      eventContent={(info) => {
+        const title = info.event.title;
+        return (
+            {title}
+        )
+      }}
+      eventClassNames={() => "cursor-pointer"}
+      eventClick={(info: { event: any }) => {
+        openModal(info.event);
+      }}
       />
 
       {/* Botão para adicionar eventos */}
       <div className="mt-4">
-        <Button className="cursor-pointer" onClick={() => openModal()}>
-          ADICIONAR EVENTOS
-        </Button>
+      <Button className="cursor-pointer" onClick={() => openModal()}>
+        ADICIONAR EVENTOS
+      </Button>
       </div>
 
       {/* Modal para visualizar e adicionar eventos */}
       <Modal isOpen={isOpen} onClose={closeModal} title={selectedEvent ? "Detalhes do Evento" : "Adicionar Evento"}>
-        {selectedEvent ? (
-          <div>
+      {selectedEvent ? (
+        <div>
             <p><strong>Título:</strong> {selectedEvent.title}</p>
             <p><strong>Início:</strong> {new Date(selectedEvent.start).toLocaleString()}</p>
             {selectedEvent.extendedProps.description && (

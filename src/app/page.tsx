@@ -1,5 +1,5 @@
 import Calendar from "@/components/calendar";
-import { AppSidebar } from "@/components/sidebar";
+import { AppSidebar } from "@/components/sidebar/sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 export default function Dashboard() {
