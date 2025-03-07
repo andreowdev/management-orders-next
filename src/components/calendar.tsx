@@ -7,8 +7,8 @@ import { Button } from "./ui/button";
 import { useAppointments } from "@/app/_home/Home/Hooks/getAppointment";
 import { useModal } from "@/hooks/modal";
 import { Modal } from "./ui/Modal";
-import FormEvent from "./ui/formEvent";
 import "./ui/calendar.css"
+import AppointmentForm from "./ui/formEvent";
 export default function Calendar() {
   const { error, events, loading } = useAppointments();
   const { isOpen, openModal, closeModal, selectedEvent } = useModal();
@@ -20,6 +20,8 @@ export default function Calendar() {
   if (error) {
     return <div>Erro ao carregar eventos: {error}</div>;
   }
+
+  const availableTimes = ["09:00", "10:30", "14:00", "16:00"];
 
 
   return (
@@ -66,7 +68,7 @@ export default function Calendar() {
             )}
           </div>
         ) : (
-          <FormEvent />
+          <AppointmentForm availableTimes={availableTimes} onSuccess={() => console.log("Agendamento criado com sucesso!")} />
         )}
       </Modal>
     </div>

@@ -16,7 +16,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     if (isOpen) {
       setShow(true);
     } else {
-      setTimeout(() => setShow(false), 200); // Delay para a animação de saída
+      setTimeout(() => setShow(false), 200); 
     }
   }, [isOpen]);
 
@@ -33,7 +33,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
         {children}
         <div className="mt-4 flex justify-end">
-          <Button onClick={onClose} className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">
+          <Button onClick={onClose} className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 cursor-pointer">
             Fechar
           </Button>
         </div>
