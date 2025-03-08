@@ -1,15 +1,14 @@
 /* ✅ Container do calendário */
 .calendar-container {
-  max-width: 100%;
+  max-width: 90%;
   margin: auto;
   padding: 10px;
 }
 
 /* ✅ Layout Geral do FullCalendar */
 .fc-view-harness {
-  height: 550px !important; /* Defina a altura que desejar */
+  height: 500px !important; /* Defina a altura que desejar */
 }
-
 .fc {
   font-family: 'Arial', sans-serif !important;
   background-color: #f8f9fa !important;
@@ -17,11 +16,9 @@
   padding: 15px !important;
 }
 
-/* ✅ Ajuste no tamanho do calendário */
 
 /* ✅ Tabela de dias maior */
 .fc-daygrid-day-frame {
-  min-height: 100px !important; /* Deixa os dias maiores */
   padding: 10px !important;
 }
 
@@ -64,9 +61,6 @@
     width: 100% !important;
   }
 
-  .fc .fc-scrollgrid {
-    min-height: 320px !important; /* Aumenta a altura do calendário */
-  }
   
 
   .fc-toolbar {

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Input } from "./input";
+import { Button } from "./button";
 
 interface FormData {
   title: string;
@@ -58,10 +60,10 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-md shadow">
+    <form onSubmit={handleSubmit} className="space-y-4  rounded-md">
       {error && <p className="text-red-500">{error}</p>}
       
-      <input
+      <Input
         type="text"
         name="title"
         value={formData.title}
@@ -71,7 +73,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({ onSuccess }) => {
         required
       />
 
-      <input
+      <Input
         type="text"
         name="description"
         value={formData.description}
@@ -81,7 +83,7 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({ onSuccess }) => {
         required
       />
 
-      <input
+      <Input
         type="datetime-local"
         name="date"
         value={formData.date}
@@ -90,13 +92,13 @@ const AppointmentForm: React.FC<AppointmentFormProps> = ({ onSuccess }) => {
         required
       />
 
-      <button
+      <Button
         type="submit"
         className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400 cursor-pointer"
         disabled={loading}
       >
         {loading ? "Enviando..." : "Criar Agendamento"}
-      </button>
+      </Button>
     </form>
   );
 };

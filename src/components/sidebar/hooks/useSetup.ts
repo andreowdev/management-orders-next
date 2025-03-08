@@ -4,7 +4,7 @@ import { Calendar, Home, Inbox, Settings, FileText } from "lucide-react"
 export const items = [
   {
     title: "Inicio",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
@@ -19,7 +19,7 @@ export const items = [
   },
   {
     title: "Relatórios",
-    url: "#",
+    url: "/reports",
     icon: FileText,
   },
   {
